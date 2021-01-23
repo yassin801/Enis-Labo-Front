@@ -1,0 +1,169 @@
+<mat-grid-list cols="3" rowHeight="100px">
+  <mat-grid-tile colspan="3"></mat-grid-tile>
+  <mat-grid-tile rowspan="2">
+    <mat-card
+    style="
+    width: 90%;margin: auto 0"
+    >
+      <div fxLayout="row" fxLayoutAlign="begin center">
+        <mat-icon>event</mat-icon>
+        <span class="username mx-12 card-title" fxHide fxShow.gt-sm >Events</span>
+      </div>
+      <div>
+      </div>
+      <br>
+      <div>
+        <label class="number-title">Number Of Events: </label>
+        <label class="number">{{events.length}}</label>
+      </div>
+      <br>
+      <button (click)="goToEvents()" class="toolbar-button" mat-button style="float: right">
+        <div fxLayout="row" fxLayoutAlign="end center">
+        <span class="username mx-12"
+              style="font-size: medium"
+              fxHide fxShow.gt-sm >See All</span>
+          <mat-icon>remove_red_eye</mat-icon>
+        </div>
+      </button>
+
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="2">
+    <mat-card
+      style="
+    width: 90%;margin: auto 0"
+    >
+      <div fxLayout="row" fxLayoutAlign="begin center">
+        <mat-icon>publication</mat-icon>
+        <span class="username mx-12 card-title" fxHide fxShow.gt-sm >Articles</span>
+      </div>
+      <div>
+      </div>
+      <br>
+      <div>
+        <label class="number-title">Number Of Articles: </label>
+        <label class="number">{{publications.length}}</label>
+      </div>
+      <br>
+      <button (click)="goToPubs()" class="toolbar-button" mat-button style="float: right">
+        <div fxLayout="row" fxLayoutAlign="end center">
+        <span class="username mx-12"
+              style="font-size: medium"
+              fxHide fxShow.gt-sm >See All</span>
+          <mat-icon>remove_red_eye</mat-icon>
+        </div>
+      </button>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="2">
+    <mat-card
+      style="
+    width: 90%;margin: auto 0"
+    >
+      <div fxLayout="row" fxLayoutAlign="begin center">
+        <mat-icon>save</mat-icon>
+        <span class="username mx-12 card-title" fxHide fxShow.gt-sm >Tools</span>
+      </div>
+      <div>
+      </div>
+      <br>
+      <div>
+        <label class="number-title">Number Of Tools: </label>
+        <label class="number">{{tools.length}}</label>
+      </div>
+      <br>
+      <button (click)="goToTools()" class="toolbar-button" mat-button style="float: right">
+        <div fxLayout="row" fxLayoutAlign="end center">
+        <span class="username mx-12"
+              style="font-size: medium"
+              fxHide fxShow.gt-sm >See All</span>
+          <mat-icon>remove_red_eye</mat-icon>
+        </div>
+      </button>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="3"></mat-grid-tile>
+  <mat-grid-tile rowspan="2">
+    <mat-card
+      style="
+    width: 90%;margin: auto 0"
+    >
+      <div fxLayout="row" fxLayoutAlign="begin center">
+        <mat-icon>portrait</mat-icon>
+        <span class="username mx-12 card-title" fxHide fxShow.gt-sm >Students</span>
+      </div>
+      <div>
+      </div>
+      <br>
+      <div>
+        <label class="number-title">Number Of Students: </label>
+        <label class="number">{{students.length}}</label>
+      </div>
+      <br>
+      <button (click)="goToMembers()" class="toolbar-button" mat-button style="float: right">
+        <div fxLayout="row" fxLayoutAlign="end center">
+        <span class="username mx-12"
+              style="font-size: medium"
+              fxHide fxShow.gt-sm >See All</span>
+          <mat-icon>remove_red_eye</mat-icon>
+        </div>
+      </button>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="2">
+    <mat-card
+      style="
+    width: 90%;margin: auto 0"
+    >
+      <div fxLayout="row" fxLayoutAlign="begin center">
+        <mat-icon>perm_identity</mat-icon>
+        <span class="username mx-12 card-title" fxHide fxShow.gt-sm >Teachers</span>
+      </div>
+      <div>
+      </div>
+      <br>
+      <div>
+        <label class="number-title">Number Of Teachers: </label>
+        <label class="number">{{teachers.length}}</label>
+      </div>
+      <br>
+      <button (click)="goToMembers()" class="toolbar-button" mat-button style="float: right">
+        <div fxLayout="row" fxLayoutAlign="end center">
+        <span class="username mx-12"
+              style="font-size: medium"
+              fxHide fxShow.gt-sm >See All</span>
+          <mat-icon>remove_red_eye</mat-icon>
+        </div>
+      </button>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="2">
+    <mat-card
+      style="
+    width: 90%;margin: auto 0"
+    >
+      <div fxLayout="row" fxLayoutAlign="begin center">
+        <mat-icon>group</mat-icon>
+        <span class="username mx-12 card-title" fxHide fxShow.gt-sm >Members</span>
+      </div>
+      <div>
+      </div>
+      <br>
+      <div>
+        <label class="number-title">Number Of Members: </label>
+        <label class="number">{{teachers.length + students.length}}</label>
+      </div>
+      <br>
+      <button (click)="goToMembers()" class="toolbar-button" mat-button style="float: right">
+        <div fxLayout="row" fxLayoutAlign="end center">
+        <span class="username mx-12"
+              style="font-size: medium"
+              fxHide fxShow.gt-sm >See All</span>
+          <mat-icon>remove_red_eye</mat-icon>
+        </div>
+      </button>
+    </mat-card>
+  </mat-grid-tile>
+
+
+</mat-grid-list>

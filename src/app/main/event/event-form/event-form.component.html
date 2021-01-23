@@ -1,0 +1,34 @@
+
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>{{isFormInEditMode() ? 'Edit Event' : 'Create New Event'}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="container">
+      <form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()" class="form" fxLayout="column">
+
+        <mat-form-field>
+          <input matInput placeholder="titre" formControlName="titre">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="date" type="date" formControlName="date">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="location" formControlName="lieu">
+        </mat-form-field>
+
+
+
+        <div class="form-element">
+          <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid">Submit</button>
+          &nbsp;
+          <button mat-raised-button color="warn" routerLink="events" class="button">Cancel</button>
+        </div>
+
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>

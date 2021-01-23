@@ -1,0 +1,101 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Creators ({{dataSource.length}}) :</mat-card-title>
+
+  </mat-card-header>
+  <mat-card-content>
+    <div class="my-16" fxLayout="row" fxLayoutAlign="begin center">
+      <form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()"  class="form" fxLayout="column">
+
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td *ngIf="userType == 'ROLE_ADMIN' || verifyUser(userId)">
+              <mat-form-field class="example-full-width">
+                <input type="text"
+                       placeholder="Pick user by CIN"
+                       aria-label="Number"
+                       matInput
+                       [(ngModel)]="cin"
+                       [formControl]="myControl"
+                       [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </td>
+            <td *ngIf="userType == 'ROLE_ADMIN' || verifyUser(userId)">
+              &nbsp;
+            </td>
+            <td *ngIf="userType == 'ROLE_ADMIN' || verifyUser(userId)">
+              <button mat-raised-button color="primary" type="submit" class="button" [disabled]="myControl.invalid">
+                <mat-icon class="s-24 mr-4">add</mat-icon>Add Creator</button>
+            </td>
+            <td *ngIf="userType == 'ROLE_ADMIN' || verifyUser(userId)">
+              &nbsp;
+            </td>
+            <td>
+              <button mat-raised-button color="warn" routerLink="events" class="button">
+                <mat-icon class="s-24 mr-4">undo</mat-icon>Back to list</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100-p">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell class="px-12" *matHeaderCellDef> ID</th>
+        <td mat-cell class="px-12" *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cin">
+        <th mat-header-cell class="px-12" *matHeaderCellDef> CIN</th>
+        <td mat-cell class="px-12" *matCellDef="let element"> {{element.cin}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell class="px-12" *matHeaderCellDef>Name</th>
+        <td mat-cell class="px-12" *matCellDef="let element"> {{(element.nom)+" "+(element.prenom)}}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell class="px-12" *matHeaderCellDef>Email</th>
+        <td mat-cell class="px-12" *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="cv">
+        <th mat-header-cell class="px-12" *matHeaderCellDef> CV</th>
+        <td mat-cell class="px-12" *matCellDef="let element">
+          <a [href]="element.cv" target="_blank">
+            <mat-icon>picture_as_pdf</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="dateNaissance">
+        <th mat-header-cell class="px-12" *matHeaderCellDef>Birth Date</th>
+        <td mat-cell class="px-12" *matCellDef="let element">
+          {{element.date | date :'d MMMM y'}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions" stickyEnd>
+        <th mat-header-cell class="px-12 w-120" *matHeaderCellDef></th>
+        <td mat-cell class="px-12 w-60" *matCellDef="let element">
+          <button
+            *ngIf="userType == 'ROLE_ADMIN' || verifyUser(userId)"
+            mat-icon-button color="warn" (click)="removeparticipant(element.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,91 @@
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>{{isFormInEditMode() ? 'Edit Teacher' : 'Create New Teacher'}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="container">
+      <form class="example-form form" [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()"  fxLayout="column">
+        <table class="example-full-width" cellspacing="0"><tr>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>First name</mat-label>
+            <input matInput formControlName="prenom">
+          </mat-form-field></td>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>Last name</mat-label>
+            <input matInput  formControlName="nom">
+          </mat-form-field></td>
+        </tr></table>
+
+        <table class="example-full-width" cellspacing="0"><tr>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>CIN</mat-label>
+            <input matInput  formControlName="cin" #postalCode maxlength="10" placeholder="Ex. 1194105">
+            <mat-hint align="end">{{postalCode.value.length}} / 10</mat-hint>
+          </mat-form-field></td>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>Grade</mat-label>
+            <input matInput placeholder="Ex. Teacher"  formControlName="grade">
+          </mat-form-field></td>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>Etablissement</mat-label>
+            <input matInput placeholder="Ex. ENIS"  formControlName="etablissement">
+          </mat-form-field></td>
+        </tr></table>
+
+        <table class="example-full-width" cellspacing="0"><tr>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Ex. member@gmail.com"  formControlName="email">
+          </mat-form-field></td>
+
+          <td><mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder=""  formControlName="password" type="password" minlength="6">
+          </mat-form-field></td>
+        </tr></table>
+
+        <table class="example-full-width" cellspacing="0"><tr>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>CV</mat-label>
+            <input matInput placeholder="URL" formControlName="cv">
+          </mat-form-field></td>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Birth Date" type="date" formControlName="date">
+            </mat-form-field>
+          </td>
+        </tr></table>
+
+
+        <div>
+          <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="image">Photo:</label>
+              <input formControlName="image" type="file" name="image"
+                     class="form-control" (change)="onFileChange($event)" id="image">
+                <div *ngIf="f.image.touched && f.image.invalid" class="alert alert-danger">
+                  <div *ngIf="f.image.errors.required">Image is required.</div>
+                </div>
+            </div>
+            <div class="form-group">
+              <br>
+              <img [src]="imageSrc" *ngIf="imageSrc" style="height:150px; ">
+            </div>
+
+          </form>
+        </div>
+        <div
+          class="form-element">
+          <br>
+          <button mat-raised-button color="primary"
+                  type="submit" class="button" [disabled]="form.invalid || addForm.invalid">Submit</button>
+          &nbsp;
+          <button mat-raised-button color="warn" (click)="onCancel()" class="button">Cancel</button>
+        </div>
+
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>
+

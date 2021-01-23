@@ -1,0 +1,91 @@
+
+<mat-card class="example-card">
+  <br>
+  <mat-card-header>
+    <mat-card-title>Tools List: &nbsp;</mat-card-title>
+
+  </mat-card-header>
+  <mat-card-content>
+
+    <div
+      *ngIf="userType == 'ROLE_ADMIN' || userType == 'ROLE_USER'"
+      class="my-16" fxLayout="row" fxLayoutAlign="end center">
+      <div>
+        <button style=" right: 0;" mat-raised-button color="primary" routerLink="create" >
+          <mat-icon class="s-24 mr-4">add</mat-icon>
+          Create New Tool
+        </button>
+      </div>
+    </div>
+
+    <div class="mat-elevation-z8 w-100-p">
+      <div>
+        <mat-form-field>
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="EX.Titre" #input>
+        </mat-form-field>
+        <mat-form-field
+          *ngIf="userType == 'ROLE_USER'"
+          class="example-full-width" style="width: 10% !important;">
+          <mat-select [(ngModel)]="selectedOption">
+            <mat-option value="All" (click)="fetchDataSource()">All</mat-option>
+            <mat-option value="Mine" (click)="loadMine()">Mine</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+      <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8 w-100-p">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell class="px-12" *matHeaderCellDef>ID</th>
+          <td mat-cell class="px-12" *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="CreatedDate">
+          <th mat-header-cell class="px-12" *matHeaderCellDef>Created Date</th>
+          <td mat-cell class="px-12" *matCellDef="let element"> {{element.date | date :'d MMMM y'}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="Source">
+          <th mat-header-cell class="px-12" *matHeaderCellDef>Source</th>
+          <td mat-cell class="px-12" *matCellDef="let element">
+            <a [href]="element.source" target="_blank">
+              <mat-icon>source</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell class="px-12 w-120" *matHeaderCellDef></th>
+          <td mat-cell class="px-12 w-180" *matCellDef="let element">
+            <button mat-icon-button color="primary" [routerLink]="element.id + '/creators'">
+              <mat-icon>settings</mat-icon>
+            </button>
+            <button *ngIf="userType == 'ROLE_ADMIN'|| verificationMap.get(element.id.toString()+';'+userId)"
+                    mat-icon-button color="primary" [routerLink]="element.id + '/edit'">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button *ngIf="userType == 'ROLE_ADMIN' || verificationMap.get(element.id.toString()+';'+userId)"
+                    mat-icon-button color="warn" (click)="onRemoveTool(element.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+
+  </mat-card-content>
+  <br>
+</mat-card>

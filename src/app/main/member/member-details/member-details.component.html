@@ -1,0 +1,333 @@
+
+<mat-card>
+  <br>
+  <mat-card-header>
+    <mat-card-title>Member Details: &nbsp;</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+  <br>
+    <table class="example-full-width" cellspacing="0"><tr>
+      <td style="width: 1%">
+        <div class="image-cropper">
+          <img [src]="imageSrc" class="rounded" />
+        </div>
+      </td>
+      <td>
+        <mat-accordion class="example-headers-align" multi>
+          <mat-expansion-panel disabled>
+            <mat-expansion-panel-header>
+              <mat-panel-title class="title">
+                Name :
+              </mat-panel-title>
+              <mat-panel-description class="description">
+                {{item.prenom + " " + item.nom}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+
+        </mat-accordion>
+      </td>
+      <td>
+
+        <mat-accordion class="example-headers-align" multi>
+          <mat-expansion-panel disabled>
+            <mat-expansion-panel-header>
+              <mat-panel-title class="title">
+                Email :
+              </mat-panel-title>
+              <mat-panel-description class="description">
+                {{item.email}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+
+        </mat-accordion>
+      </td>
+    </tr></table>
+<br>
+    <table class="example-full-width" cellspacing="0"><tr>
+      <td>
+        <mat-accordion class="example-headers-align" multi>
+          <mat-expansion-panel disabled>
+            <mat-expansion-panel-header>
+              <mat-panel-title class="title">
+                Birth Date :
+              </mat-panel-title>
+              <mat-panel-description class="description">
+                {{item.date}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+
+        </mat-accordion>
+      </td>
+      <td>
+
+        <mat-accordion class="example-headers-align" multi>
+          <mat-expansion-panel disabled>
+            <mat-expansion-panel-header>
+              <mat-panel-title class="title">
+                CIN :
+              </mat-panel-title>
+              <mat-panel-description class="description">
+                {{item.cin}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </td>
+      <td>
+        <mat-accordion class="example-headers-align" multi>
+          <mat-expansion-panel disabled>
+            <mat-expansion-panel-header>
+              <mat-panel-title class="title">
+                CV :
+              </mat-panel-title>
+              <mat-panel-description class="description"s>
+                <a [href]="item.cv" target="_blank">
+                  URL
+                </a>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+      </td>
+    </tr></table>
+
+    <div  *ngIf="item.grade">
+      <br>
+      <table class="example-full-width" cellspacing="0"><tr>
+        <td>
+          <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel disabled>
+              <mat-expansion-panel-header>
+                <mat-panel-title class="title">
+                  Grade :
+                </mat-panel-title>
+                <mat-panel-description class="description">
+                  {{item.grade}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+
+          </mat-accordion>
+        </td>
+        <td>
+
+          <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel disabled>
+              <mat-expansion-panel-header>
+                <mat-panel-title class="title">
+                  Establishment :
+                </mat-panel-title>
+                <mat-panel-description class="description">
+                  {{item.etablissement}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </td>
+      </tr></table>
+    </div>
+
+    <div  *ngIf="item.dateInscription">
+      <br>
+      <table class="example-full-width" cellspacing="0"><tr>
+        <td>
+          <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel disabled>
+              <mat-expansion-panel-header>
+                <mat-panel-title class="title">
+                  Inscription Date :
+                </mat-panel-title>
+                <mat-panel-description class="description">
+                  {{item.dateInscription}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+
+          </mat-accordion>
+        </td>
+        <td>
+
+          <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel disabled>
+              <mat-expansion-panel-header>
+                <mat-panel-title class="title">
+                  Diploma :
+                </mat-panel-title>
+                <mat-panel-description class="description">
+                  {{currentItemDiplome}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </td>
+        <td>
+          <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel disabled>
+              <mat-expansion-panel-header>
+                <mat-panel-title class="title">
+                  Mentor :
+                </mat-panel-title>
+                <mat-panel-description class="description">
+                  {{item.encadrant.prenom + " " + item.encadrant.nom}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+        </td>
+      </tr></table>
+    </div>
+
+    <div>
+      <br>
+      <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title class="title">
+              Articles ({{item.pubs.length}}) :
+            </mat-panel-title>
+            <mat-panel-description>
+              Click To View
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div *ngIf="item.pubs && item.pubs.length!=0; else emptyArt">
+              <div *ngFor="let pub of item.pubs">
+                <mat-accordion class="example-headers-align" multi>
+                  <mat-expansion-panel disabled>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        <table class="example-full-width" cellspacing="0"><tr>
+                          <td>
+                            <label  class="title">Article Title : </label> <label  class="description">{{pub.titre}}</label>
+                          </td>
+                          <td>
+                            <label  class="title">Article Source : </label> <label  class="description">
+                            <a [href]="pub.sourcepdf" target="_blank">
+                              URL
+                            </a>
+                          </label>
+                          </td>
+                          <td>
+                            <label  class="title">Article Type : </label> <label  class="description">{{pub.type}}</label>
+                          </td>
+                          <td>
+                            <label  class="title">Article Link : </label> <label  class="description">
+                            <a [href]="pub.sourcepdf" target="_blank">
+                              URL
+                            </a>
+                          </label>
+                          </td>
+                          <td>
+                            <label  class="title">Article Date : </label> <label  class="description">{{pub.date | date :'d MMMM y'}}</label>
+                          </td>
+                        </tr></table>
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                  </mat-expansion-panel>
+                </mat-accordion>
+                  <br *ngIf="item.pubs.length !== 1">
+              </div>
+          </div>
+          <ng-template #emptyArt>No Articles ...</ng-template>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div>
+      <br>
+      <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title class="title">
+              Events ({{item.evnts.length}}) :
+            </mat-panel-title>
+            <mat-panel-description>
+              Click To View
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div *ngIf="item.evnts && item.evnts.length!=0; else emptyevent">
+            <div *ngFor="let event of item.evnts">
+              <mat-accordion class="example-headers-align" multi>
+                <mat-expansion-panel disabled>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <table class="example-full-width" cellspacing="0"><tr>
+                        <td>
+                          <label  class="title">Event Title : </label> <label  class="description">{{event.titre}}</label>
+                        </td>
+                        <td>
+                          <label  class="title">Event Location : </label> <label  class="description">{{event.lieu}}</label>
+                        </td>
+                        <td>
+                          <label  class="title">Event Date : </label> <label  class="description">{{event.date | date :'d MMMM y'}}</label>
+                        </td>
+                      </tr></table>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+              </mat-accordion>
+              <br *ngIf="item.evnts.length !== 1">
+            </div>
+          </div>
+          <ng-template #emptyevent>No Events ...</ng-template>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <div>
+      <br>
+      <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title class="title">
+              Tools ({{item.outils.length}}) :
+            </mat-panel-title>
+            <mat-panel-description>
+              Click To View
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div *ngIf="item.outils && item.outils.length!=0; else empty">
+            <div *ngFor="let outil of item.outils">
+              <mat-accordion class="example-headers-align" multi>
+                <mat-expansion-panel disabled>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <table class="example-full-width" cellspacing="0"><tr>
+                        <td>
+                          <label  class="title">Tool Source : </label> <label  class="description">{{outil.source}}</label>
+                        </td>
+                        <td>
+                          <label  class="title">Tool Date : </label> <label  class="description">{{outil.date | date :'d MMMM y'}}</label>
+                        </td>
+                      </tr></table>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+              </mat-accordion>
+              <br *ngIf="item.outils.length !== 1">
+            </div>
+          </div>
+          <ng-template #empty>No Tools ...</ng-template>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="form-group">
+      <br>
+    </div>
+    <button
+      *ngIf="userRole == 'ROLE_ADMIN' || userId == item.id"
+      mat-raised-button color="primary" (click)="redirectToEdit(item.id)"  class="button">Edit</button>
+    &nbsp;
+    <button
+      *ngIf="userId == item.id"
+      mat-raised-button color="warn" (click)="redirectToDashboard()" class="button">Back to dashboard</button>
+    <button
+      *ngIf="userId != item.id"
+      mat-raised-button color="warn" (click)="redirectToMembers()" class="button">Back</button>
+  </mat-card-content>
+  <br>
+</mat-card>
+
